@@ -1,0 +1,20 @@
+{
+  "name": "file_upload",
+  "description": "Command execution utility",
+  "version": "0.0.1",
+  "private": false,
+  "author": "Dheeraj Kumar Aggarwal <dheeraj.aggarwal@optimizory.com>",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "multer": "1.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^9.2.1",
+    "should": "~7.1.0",
+    "supertest": "^6.2.2"
+  }
+}

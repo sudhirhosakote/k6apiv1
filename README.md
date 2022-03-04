@@ -1,41 +1,38 @@
-# k6apiv1
-K6 API - v1 - Feb 28 2022
+# Command Executor utility
 
+Command executor utility is used to execute command over REST APIs
 
-Use command executor to build k6 API as a docker container. Dockerfile enclosed.
-https://github.com/vrest-io/command-executer
+## Prerequisites
+* Node.js - Download and Install [Node.js](http://www.nodejs.org/download/)
 
-Installation:
-clone the command-executer repo from above link.
-Add Dockerfile as below:
--------------------------------------------------------
-FROM node:16-alpine
+## Quick Install
+  The quickest way to get started with Command Executor Utility is to clone the project and utilize it like this:
 
-# Create app directory
-WORKDIR /usr/src/app
+  Install dependencies:
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+    $ cd command-executor
+    $ npm install
 
-# Add rpm package-manager, download k6 and install
+  Then start the server using following command:
 
-RUN apk add rpm
+  	$ PORT=3001 node server.js 
 
-RUN wget https://github.com/grafana/k6/releases/download/v0.35.0/k6-v0.35.0-linux-amd64.rpm && rpm -ivh k6-v0.35.0-linux-amd64.rpm
+  	PORT: Port number on which command executor utility server will run
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
+  To use the command executor utility, please follow the following points:
 
-# Bundle app source
-COPY . .
+    * Format: {{commandExecutorBaseURL}}/execute?command=<cmd to execute>
+    * Note: 
+      ** All the scripts / data / dumps must be stored in any arbitrary directory 
+         structure of your choice, but that directory should be inside command-executor 
+         directory.
+      ** Suppose you have MySQL dump stored at location 
+         <command-executor DIRECTORY>/app-name/1.0.0/mysql/dumps/app-init.sql
+      ** Then you need to invoke the following through REST API to restore the dump
+         **** {{commandExecutorBaseURL}}/execute?command=mysql -uroot test-db < app-name/1.0.0/mysql/dumps/app-init.sql
 
-EXPOSE 80
-CMD [ "node", "server.js" ]
--------------------------------------------------------
+## Troubleshooting and Feedback
+For any issues / feedback, please contact vREST Support <support@vrest.io>
 
-Build docker container. It runs as a webapp on port 80.
-
-Any questions, contact Sudhir Hosakote Sathyamurthy
+## License
+License MIT
